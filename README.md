@@ -24,6 +24,7 @@ cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < multi_robot_graph_slam.repos
 colcon build --symlink-install
+source install/setup.bash
 ```
 
 ## Usage
