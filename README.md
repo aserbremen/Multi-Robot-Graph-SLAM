@@ -1,6 +1,6 @@
 # Multi-Robot Graph SLAM using LIDAR
 
-This repository contains a ROS2 multi-robot SLAM implementation based on the hdl_graph_slam package (https://github.com/koide3/hdl_graph_slam) for LIDAR-based 3D SLAM. The package is tested on ROS2 humble.
+This repository contains a ROS2 multi-robot 3D LIDAR SLAM implementation based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The package is tested on ROS2 humble.
 
 ## Dependencies
 
