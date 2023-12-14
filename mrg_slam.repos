@@ -9,7 +9,7 @@ repositories:
     version: main
   mrg_slam_sim:
     type: git
-    url: https://github.com/aserbremen/mrg_sim
+    url: https://github.com/aserbremen/mrg_slam_sim
     verion: main
   fast_gicp:
     type: git
