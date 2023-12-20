@@ -39,12 +39,29 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
+## Docker Installation
+
+The docker user has the id 1000 (default linux user). If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
+
+```
+cd docker/humble
+docker build -t my_user/mrg_slam:0 .
+docker run -it --rm --network=host --ipc=host --pid=host my_user/mrg_slam:0
+```
+For now you can set the `model_namespace`, the initial pose, and `use_sim_time` when running the docker container. 
+
+```
+docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=my_robot_name -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true my_user/mrg_slam:0
+```
+
+You should be able to comminicate with the docker container from the host machine, see Usage section below.
+
 ## Usage
 
 Launch the SLAM node with the following command, where `model_namespace` is going to be used to namespace all the topics and services of the robot, and `x`, `y`, `z`, `roll`, `pitch`, `yaw` are the initial pose of the robot in the map frame. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml]([config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
 
 ```
-ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
 
 Visualize the SLAM result with the following command. The rviz configuration is configured for the robot names `atlas` and `bestla`:    

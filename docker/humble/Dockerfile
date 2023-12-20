@@ -23,8 +23,17 @@ RUN vcs import src < mrg_slam.repos
 RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select \
     mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
-
 # RUN the SLAM node
+ENV MODEL_NAMESPACE=atlas
+ENV X=0.0
+ENV Y=0.0
+ENV Z=0.0
+# degrees
+ENV ROLL=0.0
+ENV PITCH=0.0
+ENV YAW=0.0
+ENV USE_SIM_TIME=true
 CMD /bin/bash -c "source /opt/ros/humble/setup.sh && \
     source /home/humble_user/ros2_ws/install/setup.sh && \
-    ros2 launch mrg_slam mrg_slam.launch.py"
+    ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=$MODEL_NAMESPACE \
+    x:=$X y:=$Y z:=$Z roll:=$ROLL pitch:=$PITCH yaw:=$YAW use_sim_time:=$USE_SIM_TIME"
