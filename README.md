@@ -57,7 +57,7 @@ Launch the SLAM node with the command below. `model_namespace` is going to be us
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
 
-If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should be correctly set. Then run the following command:
+If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set. Then run the following command:
 
 ```
 docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=my_robot_name -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true --name my_robot_name_slam  my_user/mrg_slam:0
