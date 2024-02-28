@@ -34,7 +34,7 @@ sudo apt install python3-vcstool
 git clone https://github.com/aserbremen/Multi-Robot-Graph-SLAM
 cd Multi-Robot-Graph-SLAM
 mkdir src
-vcs import src < multi_robot_graph_slam.repos
+vcs import src < mrg_slam.repos
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -47,7 +47,7 @@ The docker user has the id 1000 (default linux user). If you experience issues s
 cd docker/humble
 docker build -t my_user/mrg_slam:0 .
 ```
-You should be able to comminicate with the docker container from the host machine, see Usage section below.
+You should be able to communicate with the docker container from the host machine, see Usage section below.
 
 ## Usage
 
@@ -57,17 +57,22 @@ Launch the SLAM node with the command below. `model_namespace` is going to be us
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
 
+## Usage Docker
+
 If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set. Then run the following command:
 
 ```
 docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=my_robot_name -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true --name my_robot_name_slam  my_user/mrg_slam:0
 ```
 
+## Visualization
+
 Visualize the SLAM result with the following command. The rviz configuration is configured for the robot names `atlas` and `bestla`:    
 
 ```
 rviz2 -d path/to/mrg_slam/rviz/mrg_slam.rviz --ros-args -p use_sime_time:=true # use_sim_time when working with robags or gazebo
 ```
+## Simulation
 
 Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress).
 
