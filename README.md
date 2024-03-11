@@ -45,7 +45,7 @@ The docker user has the id 1000 (default linux user). If you experience issues s
 
 ```
 cd docker/humble
-docker build -t my_user/mrg_slam:0 .
+docker build -t mrg_slam .
 ```
 You should be able to communicate with the docker container from the host machine, see Usage section below.
 
