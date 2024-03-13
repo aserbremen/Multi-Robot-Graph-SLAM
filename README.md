@@ -29,8 +29,9 @@ The following ROS packages are required:
 
 ## Installation
 
+We use the vcs tool to clone the repositories. If you have ROS2 installed, you should be able to `sudo apt install python3-vcstool`. If not check out the [vcstool installation guide](https://github.com/dirk-thomas/vcstool?tab=readme-ov-file#how-to-install-vcstool). Then run the following commands: 
+
 ```
-sudo apt install python3-vcstool
 git clone https://github.com/aserbremen/Multi-Robot-Graph-SLAM
 cd Multi-Robot-Graph-SLAM
 mkdir src
@@ -38,6 +39,9 @@ vcs import src < mrg_slam.repos
 colcon build --symlink-install
 source install/setup.bash
 ```
+
+On memory limited systems, you might want to use the `colcon build --symlink-install --parallel-workers 2 --executor sequential` command to limit the number of parallel workers.
+
 
 ## Docker Installation
 
