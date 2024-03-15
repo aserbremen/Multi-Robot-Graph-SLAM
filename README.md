@@ -44,7 +44,7 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-On memory limited systems, you might want to use the `colcon build --symlink-install --parallel-workers 2 --executor sequential` command to limit the number of parallel workers.
+On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-j 2"` to limit the maximum number of threads used for a specific package using `make`. Then, use `colcon build --symlink-install --parallel-workers 2 --executor sequential`.
 
 
 ## Docker Installation
