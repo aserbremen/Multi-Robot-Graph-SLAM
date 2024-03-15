@@ -2,7 +2,10 @@
 
 This repository contains a ROS2 multi-robot 3D LIDAR SLAM implementation based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The package is tested on ROS2 humble and it is under active development.
 
-Check out a video of the system in action [here](https://www.youtube.com/watch?v=wFmfrwv5CcU&ab_channel=AndreasSerov).
+Check out a video of the system in action on youtube:
+<a href="https://www.youtube.com/watch?v=wFmfrwv5CcU&t=3s&ab_channel=AndreasSerov" title="Multi-Robot Graph SLAM using LIDAR">
+  <img src="https://i3.ytimg.com/vi/wFmfrwv5CcU/maxresdefault.jpg" alt="mrg_slam" width="720" />
+</a>
 
 The repositories that will be cloned with the vcs tool are:
 
@@ -13,8 +16,7 @@ The repositories that will be cloned with the vcs tool are:
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
 The procesing pipeline follows the following diagram:
-<!-- display image media/system_overview.png   -->
-![System Overview](media/system_overview.png)
+<img src="media/system_overview.png" alt="System Overview" width="720" />
 
 ## Dependencies
 
