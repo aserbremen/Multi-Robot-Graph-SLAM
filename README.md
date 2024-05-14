@@ -97,7 +97,7 @@ ros2 bag play rosbag2_marsyard_dual_robot_demo
 
 ## Simulation
 
-Alternatively to playing back the ROS2 bag, you can simulate a gazebo environment and test the multi-robot SLAM manually. Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress).
+Alternatively to playing back the ROS2 bag, you can simulate a gazebo environment and test the multi-robot SLAM manually. Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress). Note that this approach might need a bit more computational resources than the playback of the rosbag.
 
 ## Visualization
 
