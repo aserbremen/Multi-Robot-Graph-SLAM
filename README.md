@@ -95,6 +95,10 @@ To play the bag file, run the following command:
 ros2 bag play rosbag2_marsyard_dual_robot_demo
 ```
 
+## Simulation
+
+Alternatively to playing back the ROS2 bag, you can simulate a gazebo environment and test the multi-robot SLAM manually. Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress).
+
 ## Visualization
 
 Visualize the SLAM result with the following command. The rviz configuration is configured for the robot names `atlas` and `bestla`:    
@@ -127,8 +131,5 @@ ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
 
-## Simulation
-
-Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress).
 
 More information to come soon.
