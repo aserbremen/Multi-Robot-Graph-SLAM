@@ -130,6 +130,3 @@ ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path
 ```
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
-
-
-More information to come soon.
