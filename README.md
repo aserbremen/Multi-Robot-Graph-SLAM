@@ -75,6 +75,26 @@ If you want to run the SLAM node inside a docker container, make sure that the d
 docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true --name atlas_slam mrg_slam
 ```
 
+## Playback ROS2 demo bag
+
+I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. :info: Note that the bags are not exactly the same as in the video, but they are similar. You should end up with a similar looking result as demonstrated in the youtube video. The topics are as follows:
+
+- `/atlas/velodyne_points`
+- `/atlas/cmd_vel`
+- `/atlas/imu/data` # not used in the SLAM node but given for reference
+- `/atlas/odom_ground_truth`
+- `/bestla/velodyne_points`
+- `/bestla/cmd_vel`
+- `/bestla/imu/data` # not used in the SLAM node but given for reference
+- `/bestla/odom_ground_truth`
+- `/clock`
+
+To play the bag file, run the following command:
+
+```
+ros2 bag play rosbag2_marsyard_dual_robot_demo
+```
+
 ## Visualization
 
 Visualize the SLAM result with the following command. The rviz configuration is configured for the robot names `atlas` and `bestla`:    
