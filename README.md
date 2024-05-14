@@ -77,7 +77,7 @@ docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atla
 
 ## Playback ROS2 demo bag
 
-I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. :info: Note that the bags are not exactly the same as in the video, but they are similar. You should end up with a similar looking result as demonstrated in the youtube video. The topics are as follows:
+I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. Note that the bags are not exactly the same as in the video, but they are similar:grey_exclamation: You should end up with a similar looking result as demonstrated in the youtube video. The topics are as follows:
 
 - `/atlas/velodyne_points`
 - `/atlas/cmd_vel`
