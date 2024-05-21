@@ -112,7 +112,7 @@ rviz2 -d path/to/mrg_slam/rviz/mrg_slam.rviz --ros-args -p use_sime_time:=true #
 Save the graph of the robot `atlas` to a directory for inspection with the following command:
 
 ```
-ros2 service call /atlas/mrg_slam/save_graph mrg_slam_msgs/srv/SaveGraph "directory: '/path/to/save'"
+ros2 service call /atlas/mrg_slam/save_graph mrg_slam_msgs/srv/SaveGraph "directory: /path/to/save"
 ```
 
 The directory will contain a `keyframes` folder with detailed information about the keyframes and a `.pcd` per keyframe. The `edges` folder contains `.txt` files with the edge information. Additionally, the `g2o` folder contains the g2o graph files. 
@@ -126,7 +126,7 @@ To be tested.
 Save the map of the robot `atlas` to a `.pcd` file. If no resolution is given, the full resolution map is saved. Otherwise a voxel grid map with the given resolution is saved.
 
 ```
-ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path: '/path/to/save/map.pcd, resolution: 0.1}"
+ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path: /path/to/save/map.pcd, resolution: 0.1}"
 ```
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
