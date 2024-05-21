@@ -65,6 +65,12 @@ Launch the SLAM node with the command below. `model_namespace` is going to be us
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
 
+You can also supply your own configuration file. The launch script will look for the configuration file in the share directory of the package. If you add a new configuration to the `config` folder, you need to rebuild the package. Then, you can launch the SLAM node with the following command:
+
+```
+ros2 launch mrg_slam mrg_slam.launch.py config:=mrg_slam_velodyne_VLP16.yaml
+```
+
 For more detailed information on the parameters, check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
 ## Usage Docker
