@@ -118,7 +118,7 @@ rviz2 -d path/to/mrg_slam/rviz/mrg_slam.rviz --ros-args -p use_sime_time:=true #
 Save the graph of the robot `atlas` to a directory for inspection with the following command:
 
 ```
-ros2 service call /atlas/mrg_slam/save_graph mrg_slam_msgs/srv/SaveGraph "directory: /path/to/save"
+ros2 service call /atlas/mrg_slam/save_graph mrg_slam_msgs/srv/SaveGraph "{directory: /path/to/save}"
 ```
 
 The directory will contain a `keyframes` folder with detailed information about the keyframes and a `.pcd` per keyframe. The `edges` folder contains `.txt` files with the edge information. Additionally, the `g2o` folder contains the g2o graph files. 
