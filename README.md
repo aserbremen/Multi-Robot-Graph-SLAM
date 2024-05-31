@@ -99,7 +99,7 @@ Note that you need two instances of the SLAM algorithm for `atlas` and `bestla`.
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=-15 y:=13.5 z:=1.2 # terminal 1 for atlas
-ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=-15 y:=-13.0 z:=1.2 # terminal 2 for bestla
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=bestla x:=-15 y:=-13.0 z:=1.2 # terminal 2 for bestla
 ```
 
 To play the bag file, run the following command:
