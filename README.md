@@ -83,7 +83,7 @@ docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atla
 
 ## Playback ROS2 demo bag
 
-I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. Note that the bags are not exactly the same as in the video, but they are similar❕ Note that you need two instances of the SLAM algorithm for `atlas` and `bestla`. The initial poses need to be given roughly. You should end up with a similar looking result as demonstrated in the youtube video. The topics are as follows:
+I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. Note that the bags are not exactly the same as in the video, but they are similar❕ The topics are as follows:
 
 - `/atlas/velodyne_points`
 - `/atlas/cmd_vel`
@@ -94,6 +94,13 @@ I have supplied a demo bag file for testing purposes which can be downloaded fro
 - `/bestla/imu/data` # not used in the SLAM node but given for reference
 - `/bestla/odom_ground_truth`
 - `/clock`
+
+Note that you need two instances of the SLAM algorithm for `atlas` and `bestla`. The initial poses need to be given roughly. You should end up with a similar looking result as demonstrated in the youtube video.
+
+```
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=-15 y:=13.5 z:=1.2 # terminal 1 for atlas
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=-15 y:=-13.0 z:=1.2 # terminal 2 for bestla
+```
 
 To play the bag file, run the following command:
 
