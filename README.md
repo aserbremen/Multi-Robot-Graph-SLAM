@@ -69,7 +69,7 @@ ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=
 
 ### Usage without a namespace / robot name
 
-Many packages use hard-coded frames such as `odom` or `base_link` without a namespace. If you want to run the SLAM node without a namespace, you need to set the `model_namespace` to an empty string in the [config/mrg_slam.yaml](config/mrg_slam.yaml) file. Note that you can't pass an empty string as the `model_namespace` via the command line, so you must to set it directly in the configuration. Then, you can launch the SLAM node with the following command:
+Many packages use hard-coded frames such as `odom` or `base_link` without a namespace. If you want to run the SLAM node without a namespace, you need to set the `model_namespace` to an empty string in the [mrg_slam.yaml]([[config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)) file. Note that you can't pass an empty string as the `model_namespace` via the command line, so you must to set it directly in the configuration. Then, you can launch the SLAM node with the following command:
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
