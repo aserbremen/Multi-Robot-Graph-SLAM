@@ -59,11 +59,23 @@ You should be able to communicate with the docker container from the host machin
 
 ## Usage
 
-Launch the SLAM node with the command below. `model_namespace` is going to be used to namespace all the topics and services of the robot, and `x`, `y`, `z`, `roll`, `pitch`, `yaw` are the initial pose of the robot in the map frame. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml]([[config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
+### Usage with a namespace / robot name
+
+Launch the SLAM node with the command below. `model_namespace` is going to be used to namespace all the topics and services of the robot, and `x`, `y`, `z`, `roll`, `pitch`, `yaw` are the initial pose of the robot in the map frame. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
+
+### Usage without a namespace / robot name
+
+Many packages use hard-coded frames such as `odom` or `base_link` without a namespace. If you want to run the SLAM node without a namespace, you need to set the `model_namespace` to an empty string in the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) file. Note that you can't pass an empty string as the `model_namespace` via the command line, so you must to set it directly in the configuration. Then, you can launch the SLAM node with the following command:
+
+```
+ros2 launch mrg_slam mrg_slam.launch.py x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
+```
+
+### Usage with online point cloud data
 
 You can also supply your own configuration file. The launch script will look for the configuration file in the share directory of the package. If you add a new configuration to the `config` folder, you need to rebuild the package. Then, you can launch the SLAM node with the following command:
 
@@ -83,7 +95,7 @@ docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atla
 
 ## Playback ROS2 demo bag
 
-I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. Note that the bags are not exactly the same as in the video, but they are similar❕ Note that you need two instances of the SLAM algorithm for `atlas` and `bestla`. The initial poses need to be given roughly. You should end up with a similar looking result as demonstrated in the youtube video. The topics are as follows:
+I have supplied a demo bag file for testing purposes which can be downloaded from [here](https://drive.google.com/drive/folders/1sJw0ma0IINBS9GIBQdGMfNJGs2d4TF9U?usp=sharing). The bag file contains the data of two robots `atlas` and `bestla` moving in the simulated marsyard environment, demonstrated in the video above. Note that the bags are not exactly the same as in the video, but they are similar❕ The topics are as follows:
 
 - `/atlas/velodyne_points`
 - `/atlas/cmd_vel`
@@ -94,6 +106,13 @@ I have supplied a demo bag file for testing purposes which can be downloaded fro
 - `/bestla/imu/data` # not used in the SLAM node but given for reference
 - `/bestla/odom_ground_truth`
 - `/clock`
+
+Note that you need two instances of the SLAM algorithm for `atlas` and `bestla`. The initial poses need to be given roughly. You should end up with a similar looking result as demonstrated in the youtube video.
+
+```
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=-15 y:=13.5 z:=1.2 # terminal 1 for atlas
+ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=bestla x:=-15 y:=-13.0 z:=1.2 # terminal 2 for bestla
+```
 
 To play the bag file, run the following command:
 
