@@ -136,3 +136,17 @@ ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path
 ```
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
+
+## Citation
+
+If you use this package in your research, please cite the following [paper](https://ieeexplore.ieee.org/document/10553070):
+
+```
+@INPROCEEDINGS{Serov2024ICARA,
+  title={Multi-Robot Graph SLAM Using LIDAR}, 
+  author={Serov, Andreas and Clemens, Joachim and Schill, Kerstin},
+  booktitle={2024 10th International Conference on Automation, Robotics and Applications (ICARA)}, 
+  year={2024},
+  Address = {Athens, Greece},
+}
+```
