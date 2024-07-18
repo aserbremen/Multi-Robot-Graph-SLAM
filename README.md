@@ -18,6 +18,8 @@ The repositories that will be cloned with the vcs tool are:
 The procesing pipeline follows the following diagram:
 <img src="media/system_overview.png" alt="System Overview" width="720" />
 
+Feel free to open an issue if you have any questions or suggestions.
+
 ## Dependencies
 
 - OpenMP
