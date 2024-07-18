@@ -15,7 +15,7 @@ The repositories that will be cloned with the vcs tool are:
 - [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
-The procesing pipeline follows the following diagram:
+The system is described in detail in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR". The procesing pipeline follows the following diagram:
 <img src="media/system_overview.png" alt="System Overview" width="720" />
 
 Feel free to open an issue if you have any questions or suggestions.
@@ -61,7 +61,7 @@ You should be able to communicate with the docker container from the host machin
 
 ## Usage
 
-For information on the SLAM componenents check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package. Additional insights into the system can be found in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR".
+For more detailed information on the SLAM componenents check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
 The SLAM can be launched using the default config file [config/mrg_slam.yaml]([config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)) of the `mrg_slam` package with the following command:
 
