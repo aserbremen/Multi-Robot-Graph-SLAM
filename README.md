@@ -63,7 +63,7 @@ For information on the SLAM componenents check out the README.md of the [mrg_sla
 
 ### Usage with a namespace / robot name
 
-Launch the SLAM node with the command below. The parameter `model_namespace` is going to be used to namespace all the topics and services of the robot, and `x`, `y`, `z`, `roll`, `pitch`, `yaw` are the initial pose of the robot in the map frame. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
+Launch the SLAM node with the command below. The parameter `model_namespace` is going to be used to namespace all the topics and services of the robot, and `x`, `y`, `z`, `roll`, `pitch`, `yaw` (radians) are the initial pose of the robot in the map frame. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
@@ -76,6 +76,10 @@ Many packages use hard-coded frames such as `odom` or `base_link` without a name
 ```
 ros2 launch mrg_slam mrg_slam.launch.py x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
 ```
+
+Note that you don't need to pass the initial pose if you don't want to. The SLAM node will start at the pose specified in the configuration file.
+
+During visualization for naming the keyframes, the robot name will be displayed as `""` if no namespace is set.
 
 ### Usage with online point cloud data
 
@@ -146,11 +150,18 @@ The directory will contain a `keyframes` folder with detailed information about 
 
 ## Loading the Graph
 
-To be tested.
+The graph can be loaded from the directory which was previously saved with the `save_graph` service call. The graph is loaded into the SLAM node and the unique IDs of the keyframes are used to only add unknown keyframes to the graph. 
+For the robot name `atlas`:
+
+```
+ros2 service call /atlas/mrg_slam/load_graph mrg_slam_msgs/srv/LoadGraph "{directory: /path/to/load}"
+```
+
+Note that loaded keyframes when visualized have a certain string added to the name to distinguish them from the keyframes that were added during the SLAM process. Right now `(loaded)` is added to the name of the keyframe.
 
 ## Saving the Map
 
-Save the map of the robot `atlas` to a `.pcd` file. If no resolution is given, the full resolution map is saved. Otherwise a voxel grid map with the given resolution is saved.
+Save the map of the robot `atlas` to a `.pcd` file. If no resolution is given, the full resolution map is saved. Otherwise a voxel grid map with the given resolution is saved. Note that in comparison to the `save_graph` service call, the full `file_path` needs to be given.
 
 ```
 ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path: /path/to/save/map.pcd, resolution: 0.1}"
