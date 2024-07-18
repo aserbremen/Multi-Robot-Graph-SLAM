@@ -63,7 +63,7 @@ You should be able to communicate with the docker container from the host machin
 
 For more detailed information on the SLAM componenents check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
-The SLAM can be launched using the default config file [config/mrg_slam.yaml]([config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml)) of the `mrg_slam` package with the following command:
+The SLAM can be launched using the default config file [config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) of the `mrg_slam` package with the following command:
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py
