@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - continuous_integration
+  schedule: 
+    # Every Sunday at 00:00 UTC, regular build because the repo depends on fast_gicp and ndt_omp which are not my packages
+    - cron: '0 0 * * 0' 
 
 jobs:
   build:
@@ -13,9 +16,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -31,6 +31,6 @@ jobs:
       with:
         context: .
         file: ./docker/humble/Dockerfile
-        platforms: linux/amd64, linux/arm64
+        platforms: linux/amd64
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest
