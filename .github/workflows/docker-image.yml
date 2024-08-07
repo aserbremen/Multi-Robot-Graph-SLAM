@@ -1,9 +1,10 @@
 name: Docker Image CI
 
-on push:
-  branches:
-    - main
-    - countinuous_integration
+on:
+  push:
+    branches:
+      - main
+      - countinuous_integration
 
 jobs:
   build:
