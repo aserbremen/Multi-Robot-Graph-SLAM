@@ -1,10 +1,6 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches:
-      - main
-      - continuous_integration
   schedule: 
     # Every Sunday at 00:00 UTC, regular build because the repo depends on fast_gicp and ndt_omp which are not my packages
     - cron: '0 0 * * 0' 
