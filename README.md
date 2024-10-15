@@ -53,10 +53,20 @@ On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-
 
 The docker user has the id 1000 (default linux user). If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
 
+To build the docker image using the remote repositories and main branches, run the following commands:
+
 ```
-cd docker/humble
+cd docker/humble_remote
 docker build -t mrg_slam .
 ```
+
+In order to build your local workspace into the docker container, you can run the following command:
+
+```
+cd Multi-Robot-Graph-SLAM
+docker build -f docker/humble_local/Dockerfile -t mrg_slam .
+```
+
 You should be able to communicate with the docker container from the host machine, see Usage section below.
 
 ## Usage

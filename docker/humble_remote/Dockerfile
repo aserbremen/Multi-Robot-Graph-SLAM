@@ -1,3 +1,6 @@
+# This Dockerfile is used to build a Docker image with the remote state of the Multi-Robot Graph SLAM repository. 
+# The remote state is defined in the mrg_slam.repos file, which is downloaded from the main branch of the Multi-Robot Graph SLAM repository.
+
 FROM ros:humble
 
 # Install dependencies
@@ -32,8 +35,10 @@ ENV Z=0.0
 ENV ROLL=0.0
 ENV PITCH=0.0
 ENV YAW=0.0
+ENV INIT_POSE_TOPIC=""
 ENV USE_SIM_TIME=true
-CMD /bin/bash -c "source /opt/ros/humble/setup.sh && \
+CMD ["/bin/bash", "-c", "source /opt/ros/humble/setup.sh && \
     source /home/humble_user/ros2_ws/install/setup.sh && \
     ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=$MODEL_NAMESPACE \
-    x:=$X y:=$Y z:=$Z roll:=$ROLL pitch:=$PITCH yaw:=$YAW use_sim_time:=$USE_SIM_TIME"
+    x:=$X y:=$Y z:=$Z roll:=$ROLL pitch:=$PITCH yaw:=$YAW \
+    use_sim_time:=$USE_SIM_TIME init_pose_topic:=$INIT_POSE_TOPIC"]
