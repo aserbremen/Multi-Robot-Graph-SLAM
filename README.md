@@ -7,6 +7,30 @@ Check out a video of the system in action on youtube:
   <img src="https://i3.ytimg.com/vi/wFmfrwv5CcU/maxresdefault.jpg" alt="mrg_slam" width="720" />
 </a>
 
+## Table of Contents
+
+- [Multi-Robot Graph SLAM using LIDAR](#multi-robot-graph-slam-using-lidar)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Docker Installation](#docker-installation)
+  - [Usage](#usage)
+    - [Usage with a namespace / robot name](#usage-with-a-namespace--robot-name)
+    - [Usage without a namespace / robot name](#usage-without-a-namespace--robot-name)
+    - [Usage with online point cloud data](#usage-with-online-point-cloud-data)
+  - [Usage Docker](#usage-docker)
+  - [Playback ROS2 demo bag](#playback-ros2-demo-bag)
+  - [Simulation](#simulation)
+  - [Visualization](#visualization)
+  - [Saving the Graph](#saving-the-graph)
+  - [Loading the Graph](#loading-the-graph)
+  - [Saving the Map](#saving-the-map)
+  - [Running mrg\_slam with a pre-built map](#running-mrg_slam-with-a-pre-built-map)
+  - [Citation](#citation)
+
+## Overview
+
 The repositories that will be cloned with the vcs tool are:
 
 - [mrg_slam](https://github.com/aserbremen/mrg_slam) - Multi-Robot Graph SLAM using LIDAR based on hdl_graph_slam
@@ -184,6 +208,10 @@ ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path
 ```
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
+
+## Running mrg_slam with a pre-built map
+
+If you have a pre-built map, you can use the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances. Check out the pagacke [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider) for more information.
 
 ## Citation
 
