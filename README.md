@@ -66,6 +66,7 @@ git clone https://github.com/aserbremen/Multi-Robot-Graph-SLAM
 cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < mrg_slam.repos
+rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 source install/setup.bash
 ```
