@@ -78,14 +78,13 @@ On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-
 
 The docker user has the id 1000 (default linux user). If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
 
-To build the docker image using the remote repositories and main branches, run the following commands:
+The `mrg_slam` Docker is periodically built and pushed to the [Docker Hub](https://hub.docker.com/r/aserbremen/mrg_slam). To pull the docker image, run the following command:
 
 ```
-cd docker/humble_remote
-docker build -t mrg_slam .
+docker pull aserbremen/mrg_slam
 ```
 
-In order to build your local workspace into the docker container, you can run the following command:
+In order to build your local workspace into a docker container, including your own code/changes, you can run the following command:
 
 ```
 cd Multi-Robot-Graph-SLAM
@@ -134,10 +133,10 @@ You can also supply your own configuration file. The launch script will look for
 
 ## Usage Docker
 
-If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set. Then run the following command:
+If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. Assuming you use the pulled `aserbremen/mrg_slam` docker run the following command with your desired parameters:
 
 ```
-docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true --name atlas_slam mrg_slam
+docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam
 ```
 
 ## Playback ROS2 demo bag
