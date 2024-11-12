@@ -33,3 +33,6 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest
+        # Optional: Clear Docker cache to ensure the latest Dockerfile is used
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
