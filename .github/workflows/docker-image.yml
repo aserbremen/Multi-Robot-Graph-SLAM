@@ -1,9 +1,7 @@
 name: Docker Image CI
 
 on:
-  schedule: 
-    # Every Sunday at 00:00 UTC, regular build because the repo depends on fast_gicp and ndt_omp which are not my packages
-    - cron: '0 0 * * 0' 
+  workflow_dispatch: # Manually triggered workflow
 
 jobs:
   build:
@@ -12,9 +10,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with: 
-        # Ensure the latest commit is checked out
-        fetch-depth: 0
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -33,6 +28,3 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest
-        # Optional: Clear Docker cache to ensure the latest Dockerfile is used
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
