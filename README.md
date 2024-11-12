@@ -36,6 +36,7 @@ The repositories that will be cloned with the vcs tool are:
 - [mrg_slam](https://github.com/aserbremen/mrg_slam) - Multi-Robot Graph SLAM using LIDAR based on hdl_graph_slam
 - [mrg_slam_msgs](https://github.com/aserbremen/mrg_slam_msgs) - ROS2 message interfaces for mrg_slam
 - [mrg_slam_sim](https://github.com/aserbremen/mrg_slam_sim) - Gazebo simulation for mrg_slam for testing purposes
+- [small_gicp](https://github.com/koide3/small_gicp) - Point cloud registration library, successor of fast_gicp
 - [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
@@ -67,6 +68,7 @@ cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < mrg_slam.repos
 rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install --packages-select small_gicp # build small_gicp first since it is not a ROS package
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -137,6 +139,13 @@ If you want to run the SLAM node inside a docker container, make sure that the d
 
 ```
 docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam
+```
+
+For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Additionally you can setup your environment in the [.env](docker/.env) file. The `docker-compose` command will launch the SLAM node with parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
+
+```
+cd docker
+docker compose up
 ```
 
 ## Playback ROS2 demo bag
