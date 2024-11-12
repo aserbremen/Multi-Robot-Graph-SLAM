@@ -17,7 +17,8 @@ USER humble_user
 
 RUN mkdir -p /home/humble_user/ros2_ws/src
 # build the Dockerfile from the workspace root by specifying the path to the docker file
-# docker build -t some:tag -f docker/humble_local/Dockerfile .
+# docker build -t some_tag/mrg_slam -f docker/humble_local/Dockerfile .
+COPY ./src/small_gicp /home/humble_user/ros2_ws/src/small_gicp
 COPY ./src/mrg_slam /home/humble_user/ros2_ws/src/mrg_slam
 COPY ./src/mrg_slam_msgs /home/humble_user/ros2_ws/src/mrg_slam_msgs
 COPY ./src/fast_gicp /home/humble_user/ros2_ws/src/fast_gicp
@@ -26,15 +27,14 @@ COPY ./src/ndt_omp /home/humble_user/ros2_ws/src/ndt_omp
 WORKDIR /home/humble_user/ros2_ws
 
 # Build all except sim packages
-RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select \
-    mrg_slam mrg_slam_msgs fast_gicp ndt_omp
+RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select small_gicp && \
+    . /home/humble_user/ros2_ws/install/setup.sh && colcon build --symlink-install --packages-select mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
 # RUN the SLAM node
 ENV MODEL_NAMESPACE=atlas
 ENV X=0.0
 ENV Y=0.0
 ENV Z=0.0
-# degrees
 ENV ROLL=0.0
 ENV PITCH=0.0
 ENV YAW=0.0

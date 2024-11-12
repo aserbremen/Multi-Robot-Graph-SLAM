@@ -1,0 +1,22 @@
+services:
+  mrg_slam:
+    image: aserbremen/mrg_slam
+    network_mode: host
+    ipc: host
+    pid: host
+    user: ${DOCKER_USER}
+
+    environment:
+      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+
+    # Mount the mrg_slam.yaml config as well as the mrg_slam.launch.py launch file in order to reflect the changes in the container
+    volumes:
+      - ./../src/mrg_slam/config/mrg_slam.yaml:/home/humble_user/ros2_ws/src/mrg_slam/config/mrg_slam.yaml
+      - ./../src/mrg_slam/launch/mrg_slam.launch.py:/home/humble_user/ros2_ws/src/mrg_slam/launch/mrg_slam.launch.py
+
+    command: /bin/bash -c "source /opt/ros/humble/setup.bash && \
+      source /home/humble_user/ros2_ws/install/setup.bash && \
+      ros2 launch mrg_slam mrg_slam.launch.py \
+      model_namespace:=${MODEL_NAMESPACE} \
+      x:=${X:-0.0} y:=${Y:-0.0} z:=${Z:-0.0} roll:=${ROLL:-0.0} pitch:=${PITCH:-0.0} yaw:=${YAW:-0.0} \
+      init_odom_topic:=${INIT_ODOM_TOPIC:-NONE} init_pose_topic:=${INIT_POSE_TOPIC:-NONE}"

@@ -19,19 +19,19 @@ USER humble_user
 RUN mkdir -p /home/humble_user/ros2_ws/src
 WORKDIR /home/humble_user/ros2_ws
 RUN wget -O mrg_slam.repos https://raw.githubusercontent.com/aserbremen/Multi-Robot-Graph-SLAM/main/mrg_slam.repos
-# vcs is installed with ros:humble image
-RUN vcs import src < mrg_slam.repos
 
-# Build all except sim packages
-RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select \
-    mrg_slam mrg_slam_msgs fast_gicp ndt_omp
+# vcs is installed with ros:humble image, vcs pull as well. For some reason vcs import doesn't checkout the specified branch
+RUN vcs import src < mrg_slam.repos && vcs pull src
+
+# Build small_gicp first since it is a dependency of mrg_slam, not handled by ament
+RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select small_gicp && \
+    . /home/humble_user/ros2_ws/install/setup.sh && colcon build --symlink-install --packages-select mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
 # RUN the SLAM node
 ENV MODEL_NAMESPACE=atlas
 ENV X=0.0
 ENV Y=0.0
 ENV Z=0.0
-# degrees
 ENV ROLL=0.0
 ENV PITCH=0.0
 ENV YAW=0.0
