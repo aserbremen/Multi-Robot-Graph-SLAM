@@ -2,7 +2,7 @@ repositories:
   mrg_slam:
     type: git
     url: https://github.com/aserbremen/mrg_slam
-    version: main
+    version: small_gicp
   mrg_slam_msgs:
     type: git
     url: https://github.com/aserbremen/mrg_slam_msgs
