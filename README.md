@@ -28,6 +28,7 @@ Check out a video of the system in action on youtube:
   - [Saving the Map](#saving-the-map)
   - [Running mrg\_slam with a pre-built map](#running-mrg_slam-with-a-pre-built-map)
   - [Citation](#citation)
+  - [Changelog](#changelog)
 
 ## Overview
 
@@ -235,3 +236,7 @@ If you use this package in your research, please cite the following [paper](http
   Address = {Athens, Greece},
 }
 ```
+## Changelog
+
+- 2024-11-12: Added [small_gicp](https://github.com/koide3/small_gicp) as a successor of [fast_gicp](https://github.com/koide3/fast_gicp) to Multi-Robot Graph SLAM 
+- 2024-11-06: Added the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances, see [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider)
