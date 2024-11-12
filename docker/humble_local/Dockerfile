@@ -39,9 +39,10 @@ ENV ROLL=0.0
 ENV PITCH=0.0
 ENV YAW=0.0
 ENV INIT_POSE_TOPIC="NONE"
+ENV INIT_ODOM_TOPIC="NONE"
 ENV USE_SIM_TIME=true
 CMD ["/bin/bash", "-c", "source /opt/ros/humble/setup.sh && \
     source /home/humble_user/ros2_ws/install/setup.sh && \
     ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=$MODEL_NAMESPACE \
     x:=$X y:=$Y z:=$Z roll:=$ROLL pitch:=$PITCH yaw:=$YAW \
-    use_sim_time:=$USE_SIM_TIME init_pose_topic:=$INIT_POSE_TOPIC"]
+    use_sim_time:=$USE_SIM_TIME init_odom_topic:=${INIT_ODOM_TOPIC:-NONE} init_pose_topic:=${INIT_POSE_TOPIC:-NONE}"]

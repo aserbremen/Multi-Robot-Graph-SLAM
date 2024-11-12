@@ -7,6 +7,30 @@ Check out a video of the system in action on youtube:
   <img src="https://i3.ytimg.com/vi/wFmfrwv5CcU/maxresdefault.jpg" alt="mrg_slam" width="720" />
 </a>
 
+## Table of Contents
+
+- [Multi-Robot Graph SLAM using LIDAR](#multi-robot-graph-slam-using-lidar)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Docker Installation](#docker-installation)
+  - [Usage](#usage)
+    - [Usage with a namespace / robot name](#usage-with-a-namespace--robot-name)
+    - [Usage without a namespace / robot name](#usage-without-a-namespace--robot-name)
+    - [Usage with online point cloud data](#usage-with-online-point-cloud-data)
+  - [Usage Docker](#usage-docker)
+  - [Playback ROS2 demo bag](#playback-ros2-demo-bag)
+  - [Simulation](#simulation)
+  - [Visualization](#visualization)
+  - [Saving the Graph](#saving-the-graph)
+  - [Loading the Graph](#loading-the-graph)
+  - [Saving the Map](#saving-the-map)
+  - [Running mrg\_slam with a pre-built map](#running-mrg_slam-with-a-pre-built-map)
+  - [Citation](#citation)
+
+## Overview
+
 The repositories that will be cloned with the vcs tool are:
 
 - [mrg_slam](https://github.com/aserbremen/mrg_slam) - Multi-Robot Graph SLAM using LIDAR based on hdl_graph_slam
@@ -42,6 +66,7 @@ git clone https://github.com/aserbremen/Multi-Robot-Graph-SLAM
 cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < mrg_slam.repos
+rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -53,14 +78,13 @@ On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-
 
 The docker user has the id 1000 (default linux user). If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
 
-To build the docker image using the remote repositories and main branches, run the following commands:
+The `mrg_slam` Docker is periodically built and pushed to the [Docker Hub](https://hub.docker.com/r/aserbremen/mrg_slam). To pull the docker image, run the following command:
 
 ```
-cd docker/humble_remote
-docker build -t mrg_slam .
+docker pull aserbremen/mrg_slam
 ```
 
-In order to build your local workspace into the docker container, you can run the following command:
+In order to build your local workspace into a docker container, including your own code/changes, you can run the following command:
 
 ```
 cd Multi-Robot-Graph-SLAM
@@ -109,10 +133,10 @@ You can also supply your own configuration file. The launch script will look for
 
 ## Usage Docker
 
-If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set. Then run the following command:
+If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. Assuming you use the pulled `aserbremen/mrg_slam` docker run the following command with your desired parameters:
 
 ```
-docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true --name atlas_slam mrg_slam
+docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam
 ```
 
 ## Playback ROS2 demo bag
@@ -184,6 +208,10 @@ ros2 service call /atlas/mrg_slam/save_map mrg_slam_msgs/srv/SaveMap "{file_path
 ```
 
 Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
+
+## Running mrg_slam with a pre-built map
+
+If you have a pre-built map, you can use the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances. Check out the pagacke [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider) for more information.
 
 ## Citation
 
