@@ -2,7 +2,12 @@ name: Docker Image CI
 
 on:
   workflow_dispatch: # Manually triggered workflow
-
+    inputs:
+      version:
+        description: 'Version of the Docker image'
+        required: true
+        default: '1.0.0'
+        
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,4 +32,4 @@ jobs:
         file: ./docker/humble_remote/Dockerfile
         platforms: linux/amd64
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:${{ github.event.inputs.version }}
