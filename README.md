@@ -238,5 +238,7 @@ If you use this package in your research, please cite the following [paper](http
 ```
 ## Changelog
 
+- 2024-12-09: Introduced unique IDs (`boost::uuids::uuid`) for each SLAM instance, which are generated at the start of the SLAM node. Reworked loop closure detection to properly consider candidates when loading and exchanging graphs between SLAM instances.
+- 2024-12-09: Started manually tagging the [docker containers](https://hub.docker.com/r/aserbremen/mrg_slam) with (1.0.0). 
 - 2024-11-12: Added [small_gicp](https://github.com/koide3/small_gicp) as a successor of [fast_gicp](https://github.com/koide3/fast_gicp) to Multi-Robot Graph SLAM 
 - 2024-11-06: Added the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances, see [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider)
