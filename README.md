@@ -1,8 +1,8 @@
 # Multi-Robot Graph SLAM using LIDAR
 
-This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 humble and it is under active development.
+This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 humble and it is actively developed.
 
-Check out a video of the system in action on youtube:
+Check out a video of the system in action on YouTube:
 <a href="https://www.youtube.com/watch?v=wFmfrwv5CcU&t=3s&ab_channel=AndreasSerov" title="Multi-Robot Graph SLAM using LIDAR">
   <img src="https://i3.ytimg.com/vi/wFmfrwv5CcU/maxresdefault.jpg" alt="mrg_slam" width="720" />
 </a>
@@ -41,7 +41,7 @@ The repositories that will be cloned with the vcs tool are:
 - [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
-The system is described in detail in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR". The procesing pipeline follows the following diagram:
+The system is described in detail in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR". The processing pipeline follows the following diagram:
 <img src="media/system_overview.png" alt="System Overview" width="720" />
 
 Feel free to open an issue if you have any questions or suggestions.
@@ -76,29 +76,30 @@ source install/setup.bash
 
 On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-j 2"` to limit the maximum number of threads used for a specific package using `make`. Then, use `colcon build --symlink-install --parallel-workers 2 --executor sequential`.
 
-
 ## Docker Installation
 
-The docker user has the id 1000 (default linux user). If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
+The docker user has the id and gid 1000 (default linux user) and is called `ros_user`. If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
 
-The `mrg_slam` Docker is periodically built and pushed to the [Docker Hub](https://hub.docker.com/r/aserbremen/mrg_slam). To pull the docker image, run the following command:
+The `mrg_slam` Docker is periodically built and pushed to the my [Docker Hub](https://hub.docker.com/u/aserbremen). To pull the docker image, run the following command:
 
 ```
-docker pull aserbremen/mrg_slam
+docker pull aserbremen/mrg_slam_humble # for ROS2 humble
+docker pull aserbremen/mrg_slam_jazzy # for ROS2 jazzy
 ```
 
 In order to build your local workspace into a docker container, including your own code/changes, you can run the following command:
 
 ```
 cd Multi-Robot-Graph-SLAM
-docker build -f docker/humble_local/Dockerfile -t mrg_slam .
+docker build -f docker/humble_local/Dockerfile -t mrg_slam . # for ROS2 humble
+docker build -f docker/jazzy_local/Dockerfile -t mrg_slam . # for ROS2 jazzy
 ```
 
 You should be able to communicate with the docker container from the host machine, see Usage section below.
 
 ## Usage
 
-For more detailed information on the SLAM componenents check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
+For more detailed information on the SLAM components check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
 The SLAM can be launched using the default config file [config/mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) of the `mrg_slam` package with the following command:
 
@@ -108,7 +109,7 @@ ros2 launch mrg_slam mrg_slam.launch.py
 
 ### Usage with a namespace / robot name
 
-Launch the SLAM node with the command below. The parameter `model_namespace` is going to be used to namespace all the topics and services of the robot. Additionally the initial pose in the map frame `x`, `y`, `z`, `roll`, `pitch`, `yaw` (radians) can be supplied via the command line. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
+Launch the SLAM node with the command below. The parameter `model_namespace` is going to be used to namespace all the topics and services of the robot. Additionally, the initial pose in the map frame `x`, `y`, `z`, `roll`, `pitch`, `yaw` (radians) can be supplied via the command line. Check out the launch file [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) and the config file [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) for more parameters. The main point cloud topic necessary is `model_namespace/velodyne_points`. Per Default the model namespace is `atlas` and `use_sim_time` is set to `true`:
 
 ```
 ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=atlas x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.0 yaw:=0.0
@@ -136,13 +137,13 @@ You can also supply your own configuration file. The launch script will look for
 
 ## Usage Docker
 
-If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. Assuming you use the pulled `aserbremen/mrg_slam` docker run the following command with your desired parameters:
+If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. Assuming you use the pulled `aserbremen/mrg_slam_humble` docker run the following command with your desired parameters:
 
 ```
-docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam
+docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam_humble
 ```
 
-For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Additionally you can setup your environment in the [.env](docker/.env) file. The `docker-compose` command will launch the SLAM node with parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
+For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Take a look at the environment variables in the [.env](docker/.env) file and the parameters set in the [compose.yaml](docker/compose.yaml) file before using `docker compose up`. The `docker-compose` command will launch the SLAM node with ROS2 parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
 
 ```
 cd docker
@@ -238,6 +239,7 @@ If you use this package in your research, please cite the following [paper](http
 ```
 ## Changelog
 
+- 2025-01-07: Added ROS2 Jazzy Dockerfiles to this repository and images to the Docker Hub.
 - 2024-12-09: Introduced unique IDs (`boost::uuids::uuid`) for each SLAM instance, which are generated at the start of the SLAM node. Reworked loop closure detection to properly consider candidates when loading and exchanging graphs between SLAM instances.
 - 2024-12-09: Started manually tagging the [docker containers](https://hub.docker.com/r/aserbremen/mrg_slam) with (1.0.0). 
 - 2024-11-12: Added [small_gicp](https://github.com/koide3/small_gicp) as a successor of [fast_gicp](https://github.com/koide3/fast_gicp) to Multi-Robot Graph SLAM 
