@@ -9,8 +9,8 @@ on:
         default: '1.0.0'
         
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build_and_push_ubuntu_22:
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout repository
@@ -32,4 +32,29 @@ jobs:
         file: ./docker/humble_remote/Dockerfile
         platforms: linux/amd64
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam:${{ github.event.inputs.version }}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_humble:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_humble:${{ github.event.inputs.version }}
+
+  build_and_push_ubuntu_24:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./docker/humble_remote/Dockerfile
+        platforms: linux/amd64
+        push: true
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_jazzy:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_jazzy:${{ github.event.inputs.version }}
