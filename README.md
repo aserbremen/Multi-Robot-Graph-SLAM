@@ -70,6 +70,7 @@ mkdir src
 vcs import src < mrg_slam.repos
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --packages-select small_gicp # build small_gicp first since it is not a ROS package
+source install/setup.bash
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -98,6 +99,8 @@ docker build -f docker/jazzy_local/Dockerfile -t mrg_slam . # for ROS2 jazzy
 You should be able to communicate with the docker container from the host machine, see Usage section below.
 
 ## Usage
+
+**Real world info!!!** If you use `mrg_slam` on real robots, I strongly recommend using the ROS2 Jazzy version and [rmw_zenoh](https://github.com/ros2/rmw_zenoh) as the middleware. I have performed tests with two rovers using ROS2 Humble + DDS or ROS2 Jazzy + DDS, and communication between the `mrg_slam` nodes repeatedly failed. The `rmw_zenoh` middleware under ROS2 Jazzy has shown to be reliable in this context.  
 
 For more detailed information on the SLAM components check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
