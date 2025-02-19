@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Serov
+    given-names: Andreas
+  - family-names: Clemens
+    given-names: Joachim
+  - family-names: Schill
+    given-names: Kerstin
+title: "Multi-Robot Graph SLAM Using LIDAR"
+conference:
+  name: "2024 10th International Conference on Automation, Robotics and Applications (ICARA)"
+year: 2024
+keywords:
+  - Point cloud compression
+  - Base stations
+  - Simultaneous localization and mapping
+  - Laser radar
+  - Source coding
+  - Scalability
+  - Operating systems
+  - multi-robot decentralized SLAM
+  - autonomous systems
+  - cooperative exploration
+doi: "10.1109/ICARA60736.2024.10553070"
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: Serov
+      given-names: Andreas
+    - family-names: Clemens
+      given-names: Joachim
+    - family-names: Schill
+      given-names: Kerstin
+  title: "Multi-Robot Graph SLAM Using LIDAR"
+  conference:
+    name: "2024 10th International Conference on Automation, Robotics and Applications (ICARA)"
+  year: 2024
+  doi: "10.1109/ICARA60736.2024.10553070"
+  bibtex: |
+    @INPROCEEDINGS{Serov2024,
+      author={Serov, Andreas and Clemens, Joachim and Schill, Kerstin},
+      booktitle={2024 10th International Conference on Automation, Robotics and Applications (ICARA)}, 
+      title={Multi-Robot Graph SLAM Using LIDAR}, 
+      year={2024},
+      volume={},
+      number={},
+      pages={339-346},
+      keywords={Point cloud compression;Base stations;Simultaneous localization and mapping;Laser radar;Source coding;Scalability;Operating systems;multi-robot decentralized SLAM;autonomous systems;cooperative exploration},
+      doi={10.1109/ICARA60736.2024.10553070}
+    }
