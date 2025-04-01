@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-pcl-ros ros-jazzy-pcl-conversions ros-jazzy-nmea-msgs \
     ros-jazzy-tf2 ros-jazzy-tf2-ros ros-jazzy-tf2-sensor-msgs ros-jazzy-tf2-geometry-msgs \
     ros-jazzy-geodesy ros-jazzy-libg2o ros-jazzy-interactive-markers wget \
-    libceres-dev \
+    libceres-dev rmw-zenoh-cpp \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
