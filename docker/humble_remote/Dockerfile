@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-pcl-ros ros-humble-pcl-conversions ros-humble-nmea-msgs \
     ros-humble-tf2 ros-humble-tf2-ros ros-humble-tf2-sensor-msgs ros-humble-tf2-geometry-msgs \
     ros-humble-geodesy ros-humble-libg2o ros-humble-interactive-markers wget \
-    libceres-dev rmw-zenoh-cpp \
+    libceres-dev ros-humble-rmw-zenoh-cpp \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
