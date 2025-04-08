@@ -100,7 +100,7 @@ You should be able to communicate with the docker container from the host machin
 
 ## Usage
 
-**Real world info!!!** If you use `mrg_slam` on real robots, I strongly recommend using the ROS2 Jazzy version and [rmw_zenoh](https://github.com/ros2/rmw_zenoh) as the middleware. I have performed tests with two rovers using ROS2 Humble + DDS or ROS2 Jazzy + DDS, and communication between the `mrg_slam` nodes repeatedly failed. The `rmw_zenoh` middleware under ROS2 Jazzy has shown to be reliable in this context.  
+:information_source: If you use `mrg_slam` on real robots, I strongly recommend using the ROS2 Jazzy version and [rmw_zenoh](https://github.com/ros2/rmw_zenoh) as the middleware. I have performed tests with two rovers using ROS2 Humble + DDS or ROS2 Jazzy + DDS, and communication between the `mrg_slam` nodes repeatedly failed. The `rmw_zenoh` middleware under ROS2 Jazzy has shown to be reliable in this context.  
 
 For more detailed information on the SLAM components check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
