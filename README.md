@@ -69,8 +69,6 @@ cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < mrg_slam.repos
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install --packages-select small_gicp # build small_gicp first since it is not a ROS package
-source install/setup.bash
 colcon build --symlink-install
 source install/setup.bash
 ```
