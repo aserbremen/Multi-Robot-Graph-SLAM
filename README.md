@@ -1,6 +1,6 @@
 # Multi-Robot Graph SLAM using LIDAR
 
-This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 humble and it is actively developed.
+This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 `Humble` and `Jazzy` and it is actively developed.
 
 Check out a video of the system in action on YouTube:
 <a href="https://www.youtube.com/watch?v=wFmfrwv5CcU&t=3s&ab_channel=AndreasSerov" title="Multi-Robot Graph SLAM using LIDAR">
@@ -69,8 +69,6 @@ cd Multi-Robot-Graph-SLAM
 mkdir src
 vcs import src < mrg_slam.repos
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install --packages-select small_gicp # build small_gicp first since it is not a ROS package
-source install/setup.bash
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -100,7 +98,7 @@ You should be able to communicate with the docker container from the host machin
 
 ## Usage
 
-**Real world info!!!** If you use `mrg_slam` on real robots, I strongly recommend using the ROS2 Jazzy version and [rmw_zenoh](https://github.com/ros2/rmw_zenoh) as the middleware. I have performed tests with two rovers using ROS2 Humble + DDS or ROS2 Jazzy + DDS, and communication between the `mrg_slam` nodes repeatedly failed. The `rmw_zenoh` middleware under ROS2 Jazzy has shown to be reliable in this context.  
+:information_source: If you use `mrg_slam` on real robots, I strongly recommend using the ROS2 Jazzy version and [rmw_zenoh](https://github.com/ros2/rmw_zenoh) as the middleware. I have performed tests with two rovers using ROS2 Humble + DDS or ROS2 Jazzy + DDS, and communication between the `mrg_slam` nodes repeatedly failed. The `rmw_zenoh` middleware under ROS2 Jazzy has shown to be reliable in this context.  
 
 For more detailed information on the SLAM components check out the README.md of the [mrg_slam](https://github.com/aserbremen/mrg_slam) package.
 
