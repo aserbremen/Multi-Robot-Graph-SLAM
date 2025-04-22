@@ -1,0 +1,50 @@
+name: Cross Building the Docker Image
+
+on:
+  workflow_dispatch: # Manually triggered workflow
+    inputs:
+      version:
+        description: 'Version of the Docker image'
+        required: true
+        default: '1.0.0'
+        
+jobs:
+  build_ubuntu_22:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./docker/humble_remote/Dockerfile
+        platforms: linux/amd64, linux/arm64
+        push: false
+        load: true
+        tags: mrg_slam_humble:latest,mrg_slam_humble:${{ github.event.inputs.version }}
+
+  build_ubuntu_24:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./docker/jazzy_remote/Dockerfile
+        platforms: linux/amd64, linux/arm64
+        push: false
+        load: true
+        tags: mrg_slam_jazzy:latest,mrg_slam_jazzy:${{ github.event.inputs.version }}
