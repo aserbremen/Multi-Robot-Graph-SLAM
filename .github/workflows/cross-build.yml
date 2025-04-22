@@ -26,7 +26,7 @@ jobs:
         file: ./docker/humble_remote/Dockerfile
         platforms: linux/amd64, linux/arm64
         push: false
-        load: true
+        # load: true
         tags: mrg_slam_humble:latest,mrg_slam_humble:${{ github.event.inputs.version }}
 
   build_ubuntu_24:
@@ -46,5 +46,5 @@ jobs:
         file: ./docker/jazzy_remote/Dockerfile
         platforms: linux/amd64, linux/arm64
         push: false
-        load: true
+        # load: true
         tags: mrg_slam_jazzy:latest,mrg_slam_jazzy:${{ github.event.inputs.version }}
