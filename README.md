@@ -77,9 +77,9 @@ On memory limited systems, you need to export the MAKEFLAGS `export MAKEFLAGS="-
 
 ## Docker Installation
 
-The docker user has the id and gid 1000 (default linux user) and is called `ros_user`. If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
+The docker user has the id and gid 1000 (default linux user) and is called `ubuntu`. If you experience issues seeing the topics from the docker container, you might need to change the user id in the Dockerfile to your user id.
 
-The `mrg_slam` Docker is periodically built and pushed to the my [Docker Hub](https://hub.docker.com/u/aserbremen). To pull the docker image, run the following command:
+The `mrg_slam` Docker is manually built and pushed to the my [Docker Hub](https://hub.docker.com/u/aserbremen). I added a successful docker build for `arm64` platforms starting with version `1.2.0`, let me know if it works on your arm machine. To pull the docker image, run the following command:
 
 ```
 docker pull aserbremen/mrg_slam_humble # for ROS2 humble
@@ -240,6 +240,7 @@ If you use this package in your research, please cite the following [paper](http
 ```
 ## Changelog
 
+- 2025-04-23: Added `arm64` Docker support to the Docker images hosted on https://hub.docker.com/repositories/aserbremen. 
 - 2025-01-07: Added ROS2 Jazzy Dockerfiles to this repository and images to the Docker Hub.
 - 2024-12-09: Introduced unique IDs (`boost::uuids::uuid`) for each SLAM instance, which are generated at the start of the SLAM node. Reworked loop closure detection to properly consider candidates when loading and exchanging graphs between SLAM instances.
 - 2024-12-09: Started manually tagging the [docker containers](https://hub.docker.com/r/aserbremen/mrg_slam) with (1.0.0). 
