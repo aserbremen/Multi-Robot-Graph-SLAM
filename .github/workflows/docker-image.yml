@@ -30,7 +30,7 @@ jobs:
       with:
         context: .
         file: ./docker/humble_remote/Dockerfile
-        platforms: linux/amd64
+        platforms: linux/amd64, linux/arm64
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_humble:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_humble:${{ github.event.inputs.version }}
 
@@ -55,6 +55,6 @@ jobs:
       with:
         context: .
         file: ./docker/jazzy_remote/Dockerfile
-        platforms: linux/amd64
+        platforms: linux/amd64, linux/arm64
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_jazzy:latest,${{ secrets.DOCKER_HUB_USERNAME }}/mrg_slam_jazzy:${{ github.event.inputs.version }}
