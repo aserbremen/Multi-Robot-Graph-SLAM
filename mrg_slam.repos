@@ -2,7 +2,7 @@ repositories:
   mrg_slam:
     type: git
     url: https://github.com/aserbremen/mrg_slam
-    version: main
+    version: arm64_build
   mrg_slam_msgs:
     type: git
     url: https://github.com/aserbremen/mrg_slam_msgs
@@ -21,5 +21,6 @@ repositories:
     version: master
   ndt_omp:
     type: git
-    url: https://github.com/koide3/ndt_omp
+    # This repository is a fork of the original ndt_omp repository to support arm64 architecture.
+    url: https://github.com/aserbremen/ndt_omp
     version: master
