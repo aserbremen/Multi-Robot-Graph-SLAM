@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-pcl-ros ros-humble-pcl-conversions ros-humble-nmea-msgs \
     ros-humble-tf2 ros-humble-tf2-ros ros-humble-tf2-sensor-msgs ros-humble-tf2-geometry-msgs \
     ros-humble-geodesy ros-humble-libg2o ros-humble-interactive-markers wget \
-    libceres-dev ros-jazzy-rmw-zenoh-cpp  \
+    libceres-dev ros-humble-rmw-zenoh-cpp  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -27,7 +27,7 @@ COPY ./src/ndt_omp /home/ubuntu/ros2_ws/src/ndt_omp
 WORKDIR /home/ubuntu/ros2_ws
 
 # Build all except sim packages
-RUN . /opt/ros/jazzy/setup.sh && colcon build --symlink-install --packages-select small_gicp mrg_slam mrg_slam_msgs fast_gicp ndt_omp
+RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select small_gicp mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
 # RUN the SLAM node
 ENV MODEL_NAMESPACE=atlas
