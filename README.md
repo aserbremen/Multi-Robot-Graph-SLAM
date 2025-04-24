@@ -187,7 +187,7 @@ Alternatively to playing back the ROS2 bag, you can simulate a gazebo environmen
 Visualize the SLAM result with the following command. The rviz configuration is configured for the robot names `atlas` and `bestla`:    
 
 ```
-rviz2 -d path/to/mrg_slam/rviz/mrg_slam.rviz --ros-args -p use_sime_time:=true # use_sim_time when working with robags or gazebo
+rviz2 -d path/to/mrg_slam/rviz/mrg_slam.rviz
 ```
 
 ## Saving the Graph
