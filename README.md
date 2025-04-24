@@ -180,7 +180,7 @@ ros2 bag play rosbag2_marsyard_dual_robot_demo
 
 ## Simulation
 
-Alternatively to playing back the ROS2 bag, you can simulate a gazebo environment and test the multi-robot SLAM manually. Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress). Note that this approach might need a bit more computational resources than the playback of the rosbag.
+Alternatively to playing back the ROS2 bag, you can simulate a gazebo environment and test the multi-robot SLAM manually. Check out the repository [mrg_slam_sim](https://github.com/aserbremen/mrg_sim) for testing out the multi-robot SLAM implementation in a simulated environment using Gazebo (tested on Fortress and Harmonic). Note that this approach might need a bit more computational resources than the playback of the rosbag.
 
 ## Visualization
 
@@ -223,7 +223,7 @@ Inspect the map with the pcl_viewer `pcl_viewer /path/to/save/map.pcd`.
 
 ## Running mrg_slam with a pre-built map
 
-If you have a pre-built map, you can use the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances. Check out the pagacke [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider) for more information.
+If you have a pre-built map (`.pcd` file), you can use the `mrg_slam_static_keyframe_provider` package to provide keyframes to the SLAM instances. Check out the pagacke [mrg_slam_static_keyframe_provider](https://github.com/aserbremen/mrg_slam_static_keyframe_provider) for more information.
 
 ## Citation
 
