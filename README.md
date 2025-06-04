@@ -38,7 +38,7 @@ The repositories that will be cloned with the vcs tool are:
 - [mrg_slam_msgs](https://github.com/aserbremen/mrg_slam_msgs) - ROS2 message interfaces for mrg_slam
 - [mrg_slam_sim](https://github.com/aserbremen/mrg_slam_sim) - Gazebo simulation for mrg_slam for testing purposes
 - [small_gicp](https://github.com/koide3/small_gicp) - Point cloud registration library, successor of fast_gicp
-- [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching
+- [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching, kept for GPU-based scan matching
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
 The system is described in detail in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR". The processing pipeline follows the following diagram:
