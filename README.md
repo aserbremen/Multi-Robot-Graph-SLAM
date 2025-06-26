@@ -1,6 +1,6 @@
 # Multi-Robot Graph SLAM using LIDAR
 
-This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 `Humble` and `Jazzy` and it is actively developed.
+This repository contains a ROS2 multi-robot 3D LIDAR SLAM system based on the [hdl_graph_slam](https://github.com/koide3/hdl_graph_slam) package. The system is tested on ROS2 `Humble` and `Jazzy` and it is actively developed. It is designed to work with multiple robots, each equipped with a 3D LIDAR sensor and each robot running its own instance of the SLAM algorithm. Each robot can share its graph with other robots, allowing for a collaborative SLAM approach. The system is capable of handling loop closures, can save and load graphs, and save maps.
 
 Check out a video of the system in action on YouTube:
 <a href="https://www.youtube.com/watch?v=wFmfrwv5CcU&t=3s&ab_channel=AndreasSerov" title="Multi-Robot Graph SLAM using LIDAR">
@@ -34,11 +34,11 @@ Check out a video of the system in action on YouTube:
 
 The repositories that will be cloned with the vcs tool are:
 
-- [mrg_slam](https://github.com/aserbremen/mrg_slam) - Multi-Robot Graph SLAM using LIDAR based on hdl_graph_slam
+- [mrg_slam](https://github.com/aserbremen/mrg_slam) - Multi-Robot Graph SLAM ROS2 package based on hdl_graph_slam
 - [mrg_slam_msgs](https://github.com/aserbremen/mrg_slam_msgs) - ROS2 message interfaces for mrg_slam
 - [mrg_slam_sim](https://github.com/aserbremen/mrg_slam_sim) - Gazebo simulation for mrg_slam for testing purposes
 - [small_gicp](https://github.com/koide3/small_gicp) - Point cloud registration library, successor of fast_gicp
-- [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching
+- [fast_gicp](https://github.com/SMRT-AIST/fast_gicp) - Fast GICP library for scan matching, kept for GPU-based scan matching
 - [ndt_omp](https://github.com/koide3/ndt_omp) - Normal Distributions Transform (NDT) library for scan matching
 
 The system is described in detail in the [paper](https://ieeexplore.ieee.org/document/10553070) titled "Multi-Robot Graph SLAM using LIDAR". The processing pipeline follows the following diagram:
@@ -144,7 +144,7 @@ If you want to run the SLAM node inside a docker container, make sure that the d
 docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam_humble
 ```
 
-For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Take a look at the environment variables in the [.env](docker/.env) file and the parameters set in the [compose.yaml](docker/compose.yaml) file before using `docker compose up`. The `docker-compose` command will launch the SLAM node with ROS2 parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
+For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Take a look at the environment variables in the [.env](docker/.env) file and the parameters set in the [compose.yaml](docker/compose.yaml) file before using `docker compose up`. The `docker compose` command will launch the SLAM node with ROS2 parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
 
 ```
 cd docker
@@ -236,6 +236,7 @@ If you use this package in your research, please cite the following [paper](http
   booktitle={2024 10th International Conference on Automation, Robotics and Applications (ICARA)}, 
   year={2024},
   Address = {Athens, Greece},
+  doi={10.1109/ICARA60736.2024.10553070}
 }
 ```
 ## Changelog
