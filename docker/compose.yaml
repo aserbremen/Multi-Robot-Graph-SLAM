@@ -1,21 +1,22 @@
 services:
   mrg_slam:
-    image: aserbremen/mrg_slam_humble
+    image: aserbremen/mrg_slam_jazzy
     network_mode: host
     ipc: host
     pid: host
     user: ${DOCKER_USER}
 
     environment:
-      - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+      # - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
+      - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION}
 
     # Mount the mrg_slam.yaml config as well as the mrg_slam.launch.py launch file in order to reflect the changes in the container
     volumes:
-      - ./../src/mrg_slam/config/mrg_slam.yaml:/home/ros_user/ros2_ws/src/mrg_slam/config/mrg_slam.yaml
-      - ./../src/mrg_slam/launch/mrg_slam.launch.py:/home/ros_user/ros2_ws/src/mrg_slam/launch/mrg_slam.launch.py
+      - ./../src/mrg_slam/config/mrg_slam.yaml:/home/ubuntu/ros2_ws/src/mrg_slam/config/mrg_slam.yaml
+      - ./../src/mrg_slam/launch/mrg_slam.launch.py:/home/ubuntu/ros2_ws/src/mrg_slam/launch/mrg_slam.launch.py
 
     command: /bin/bash -c "source /opt/ros/${MY_ROS_DISTRO}/setup.bash && \
-      source /home/ros_user/ros2_ws/install/setup.bash && \
+      source /home/ubuntu/ros2_ws/install/setup.bash && \
       ros2 launch mrg_slam mrg_slam.launch.py \
       model_namespace:=${MODEL_NAMESPACE} use_sim_time:=${USE_SIM_TIME} \
       x:=${X:-0.0} y:=${Y:-0.0} z:=${Z:-0.0} roll:=${ROLL:-0.0} pitch:=${PITCH:-0.0} yaw:=${YAW:-0.0} \
