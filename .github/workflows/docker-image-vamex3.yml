@@ -10,7 +10,7 @@ on:
       image_name:
         description: 'Name of the Docker image'
         required: true
-        default: 'gitlab.informatik.uni-bremen.de:5005/vamex/container-repository/<Image-Name>:<Versions-Tag>
+        default: 'gitlab.informatik.uni-bremen.de:5005/vamex/container-repository/<Image-Name>:<Versions-Tag>'
 
 jobs:
   # build_and_push_ubuntu_22:
