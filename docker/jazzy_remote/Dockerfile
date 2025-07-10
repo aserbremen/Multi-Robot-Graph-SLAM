@@ -17,7 +17,7 @@ USER ubuntu
 
 RUN mkdir -p /home/ubuntu/ros2_ws/src
 WORKDIR /home/ubuntu/ros2_ws
-RUN wget -O mrg_slam.repos https://github.com/aserbremen/Multi-Robot-Graph-SLAM/blob/vamex3_fieldtest/mrg_slam.repos
+RUN wget -O mrg_slam.repos https://raw.githubusercontent.com/aserbremen/Multi-Robot-Graph-SLAM/refs/heads/vamex3_fieldtest/mrg_slam.repos
 
 # vcs is installed with ros:jazzy image, vcs pull as well. For some reason vcs import doesn't checkout the specified branch
 RUN vcs import src < mrg_slam.repos && vcs pull src
