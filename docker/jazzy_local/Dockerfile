@@ -28,6 +28,5 @@ WORKDIR /home/ubuntu/ros2_ws
 # Build all except sim packages
 RUN . /opt/ros/jazzy/setup.sh && colcon build --symlink-install --packages-select small_gicp mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
-# Setup ROS2 introspection
-CMD ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.sh && \
-    source /home/ubuntu/ros2_ws/install/setup.sh && exec /bin/bash"]
+# Source the ROS2 environment
+CMD ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.sh && source /home/ubuntu/ros2_ws/install/setup.sh && exec /bin/bash"]
