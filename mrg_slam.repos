@@ -26,5 +26,5 @@ repositories:
   #   version: master
   direct_lidar_inertial_odometry:
     type: git
-    url: https://github.com/vectr-ucla/direct_lidar_inertial_odometry/tree/master
+    url: https://github.com/vectr-ucla/direct_lidar_inertial_odometry.git
     version: feature/ros2
