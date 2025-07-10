@@ -7,20 +7,24 @@ repositories:
     type: git
     url: https://github.com/aserbremen/mrg_slam_msgs
     version: main
-  mrg_slam_sim:
-    type: git
-    url: https://github.com/aserbremen/mrg_slam_sim
-    verion: main
+  # mrg_slam_sim:
+  #   type: git
+  #   url: https://github.com/aserbremen/mrg_slam_sim
+  #   verion: main
   small_gicp:
     type: git
     url: https://github.com/koide3/small_gicp.git
     version: master
-  fast_gicp:
+  # fast_gicp:
+  #   type: git
+  #   url: https://github.com/SMRT-AIST/fast_gicp
+  #   version: master
+  # ndt_omp:
+  #   type: git
+  #   # This repository is a fork of the original ndt_omp repository to support arm64 architecture.
+  #   url: https://github.com/aserbremen/ndt_omp
+  #   version: master
+  direct_lidar_inertial_odometry:
     type: git
-    url: https://github.com/SMRT-AIST/fast_gicp
-    version: master
-  ndt_omp:
-    type: git
-    # This repository is a fork of the original ndt_omp repository to support arm64 architecture.
-    url: https://github.com/aserbremen/ndt_omp
-    version: master
+    url: https://github.com/vectr-ucla/direct_lidar_inertial_odometry/tree/feature/ros2
+    version:

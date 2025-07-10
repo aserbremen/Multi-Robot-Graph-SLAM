@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-pcl-ros ros-jazzy-pcl-conversions ros-jazzy-nmea-msgs \
     ros-jazzy-tf2 ros-jazzy-tf2-ros ros-jazzy-tf2-sensor-msgs ros-jazzy-tf2-geometry-msgs \
     ros-jazzy-geodesy ros-jazzy-libg2o ros-jazzy-interactive-markers wget \
-    libceres-dev ros-jazzy-rmw-zenoh-cpp libgeographiclib-dev \
+    libceres-dev ros-jazzy-rmw-zenoh-cpp libgeographiclib-dev libomp-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +17,7 @@ USER ubuntu
 
 RUN mkdir -p /home/ubuntu/ros2_ws/src
 WORKDIR /home/ubuntu/ros2_ws
-RUN wget -O mrg_slam.repos https://raw.githubusercontent.com/aserbremen/Multi-Robot-Graph-SLAM/vamex3_fieldtest/mrg_slam.repos
+RUN wget -O mrg_slam.repos https://github.com/aserbremen/Multi-Robot-Graph-SLAM/blob/vamex3_fieldtest/mrg_slam.repos
 
 # vcs is installed with ros:jazzy image, vcs pull as well. For some reason vcs import doesn't checkout the specified branch
 RUN vcs import src < mrg_slam.repos && vcs pull src
