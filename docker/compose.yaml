@@ -4,20 +4,32 @@ services:
     network_mode: host
     ipc: host
     pid: host
-    user: ${DOCKER_USER}
+    user: "1000:1000" 
 
     environment:
-      # - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
-      - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION}
+      RMW_IMPLEMENTATION: ${RMW_IMPLEMENTATION:-rmw_zenoh_cpp}
+      RCUTILS_LOGGING_BUFFERED_STREAM: "1"  # Enable buffered logging
+      RCUTILS_LOGGING_USE_STDOUT: "0"  # Enable logging to stdout
+      # Algo parameters
+      USE_SIM_TIME: ${USE_SIM_TIME:-true}
+      MODEL_NAMESPACE: ${MODEL_NAMESPACE:-atlas}
+      X: ${X:-0.0}
+      Y: ${Y:-0.0}
+      Z: ${Z:-0.0}
+      ROLL: ${ROLL:-0.0}
+      PITCH: ${PITCH:-0.0}
+      YAW: ${YAW:-0.0}
+      INIT_ODOM_TOPIC: ${INIT_ODOM_TOPIC:-NONE}
+      INIT_POSE_TOPIC: ${INIT_POSE_TOPIC:-NONE}
 
     # Mount the mrg_slam.yaml config as well as the mrg_slam.launch.py launch file in order to reflect the changes in the container
     volumes:
       - ./../src/mrg_slam/config/mrg_slam.yaml:/home/ubuntu/ros2_ws/src/mrg_slam/config/mrg_slam.yaml
       - ./../src/mrg_slam/launch/mrg_slam.launch.py:/home/ubuntu/ros2_ws/src/mrg_slam/launch/mrg_slam.launch.py
 
-    command: /bin/bash -c "source /opt/ros/${MY_ROS_DISTRO}/setup.bash && \
+    command: /bin/bash -c "source /ros_entrypoint.sh && \
       source /home/ubuntu/ros2_ws/install/setup.bash && \
       ros2 launch mrg_slam mrg_slam.launch.py \
-      model_namespace:=${MODEL_NAMESPACE} use_sim_time:=${USE_SIM_TIME} \
-      x:=${X:-0.0} y:=${Y:-0.0} z:=${Z:-0.0} roll:=${ROLL:-0.0} pitch:=${PITCH:-0.0} yaw:=${YAW:-0.0} \
-      init_odom_topic:=${INIT_ODOM_TOPIC:-NONE} init_pose_topic:=${INIT_POSE_TOPIC:-NONE}"
+      model_namespace:=$$MODEL_NAMESPACE use_sim_time:=$$USE_SIM_TIME \
+      x:=$$X y:=$$Y z:=$$Z roll:=$$ROLL pitch:=$$PITCH yaw:=$$YAW \
+      init_odom_topic:=$$INIT_ODOM_TOPIC init_pose_topic:=$$INIT_POSE_TOPIC"

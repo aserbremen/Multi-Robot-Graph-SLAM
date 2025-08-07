@@ -138,13 +138,9 @@ You can also supply your own configuration file. The launch script will look for
 
 ## Usage Docker
 
-If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. Assuming you use the pulled `aserbremen/mrg_slam_humble` docker run the following command with your desired parameters:
+If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. 
 
-```
-docker run -it --rm --network=host --ipc=host --pid=host -e MODEL_NAMESPACE=atlas -e X=0.0 -e Y=0.0 -e Z=0.0 -e ROLL=0.0 -e PITCH=0.0 -e YAW=0.0 -e USE_SIM_TIME=true -e INIT_ODOM_TOPIC=/atlas/odom --name atlas_slam aserbremen/mrg_slam_humble
-```
-
-For convenience, I created a [compose.yaml](docker/compose.yaml) file which can be used to run the SLAM node inside a docker container. The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. Take a look at the environment variables in the [.env](docker/.env) file and the parameters set in the [compose.yaml](docker/compose.yaml) file before using `docker compose up`. The `docker compose` command will launch the SLAM node with ROS2 parameters and launch file from your workspace. This is useful if you don't want to run the standard configuration of the docker image.
+Checkout the docker compose file: [compose.yaml](docker/compose.yaml). The docker compose binds the [mrg_slam.yaml](https://github.com/aserbremen/mrg_slam/blob/main/config/mrg_slam.yaml) config and the [mrg_slam.launch.py](https://github.com/aserbremen/mrg_slam/blob/main/launch/mrg_slam.launch.py) launch file of your local workspace, i.e. your `src` folder. 
 
 ```
 cd docker

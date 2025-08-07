@@ -25,5 +25,9 @@ RUN vcs import src < mrg_slam.repos && vcs pull src
 # Build small_gicp first since it is a dependency of mrg_slam, not handled by ament
 RUN . /opt/ros/jazzy/setup.sh && colcon build --symlink-install --packages-select small_gicp mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
+# Source the ROS2 and workspace environment for convenience
+RUN echo "source /ros_entrypoint.sh" >> /home/ubuntu/.bashrc && \
+    echo "source /home/ubuntu/ros2_ws/install/setup.sh" >> /home/ubuntu/.bashrc
+
 # Source the ROS2 environment
-CMD ["/bin/bash", "-c", "source /opt/ros/jazzy/setup.sh && source /home/ubuntu/ros2_ws/install/setup.sh"]
+CMD ["/bin/bash"]

@@ -26,19 +26,9 @@ RUN vcs import src < mrg_slam.repos && vcs pull src
 # Build small_gicp first since it is a dependency of mrg_slam, not handled by ament
 RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select small_gicp mrg_slam mrg_slam_msgs fast_gicp ndt_omp
 
-# RUN the SLAM node
-ENV MODEL_NAMESPACE=atlas
-ENV X=0.0
-ENV Y=0.0
-ENV Z=0.0
-ENV ROLL=0.0
-ENV PITCH=0.0
-ENV YAW=0.0
-ENV INIT_POSE_TOPIC="NONE"
-ENV INIT_ODOM_TOPIC="NONE"
-ENV USE_SIM_TIME=true
-CMD ["/bin/bash", "-c", "source /opt/ros/humble/setup.sh && \
-    source /home/ubuntu/ros2_ws/install/setup.sh && \
-    ros2 launch mrg_slam mrg_slam.launch.py model_namespace:=$MODEL_NAMESPACE \
-    x:=${X:-0.0} y:=${Y:-0.0} z:=${Z:-0.0} roll:=${ROLL:-0.0} pitch:=${PITCH:-0.0} yaw:=${YAW:-0.0} \
-    use_sim_time:=$USE_SIM_TIME init_odom_topic:=${INIT_ODOM_TOPIC:-NONE} init_pose_topic:=${INIT_POSE_TOPIC:-NONE}"]
+# Source the ROS2 and workspace environment for convenience
+RUN echo "source /ros_entrypoint.sh" >> /home/ubuntu/.bashrc && \
+    echo "source /home/ubuntu/ros2_ws/install/setup.sh" >> /home/ubuntu/.bashrc
+
+# Source the ROS2 environment
+CMD ["/bin/bash"]
