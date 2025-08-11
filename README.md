@@ -126,16 +126,6 @@ ros2 launch mrg_slam mrg_slam.launch.py x:=0.0 y:=0.0 z:=0.0 roll:=0.0 pitch:=0.
 
 During visualization for naming the keyframes, the robot name will be displayed as `""` if no namespace is set.
 
-### Usage with online point cloud data
-
-I have tested the SLAM with online point cloud data from a Velodyne VLP16 LIDAR. The velodyne driver will be launched together with the SLAM node by passing the `config` parameter to the launch script. The configuration file `mrg_slam_velodyne_VLP16.yaml` is located in the `config` folder of the package. 
-
-```
-ros2 launch mrg_slam mrg_slam.launch.py config:=mrg_slam_velodyne_VLP16.yaml
-```
-
-You can also supply your own configuration file. The launch script will look for the configuration file in the share directory of the package. If you add a new configuration to the `config` folder, you need to rebuild the package.
-
 ## Usage Docker
 
 If you want to run the SLAM node inside a docker container, make sure that the docker container can communicate with the host machine. For example, environment variables like ROS_LOCALHOST_ONLY or ROS_DOMAIN_ID should not set or should be correctly set on the host and docker system. 
@@ -237,6 +227,7 @@ If you use this package in your research, please cite the following [paper](http
 ```
 ## Changelog
 
+- 2025-08-07: Version 1.3.0 refactored `mrg_slam` to dynamically use most ROS2 parameters instead of setting member variables in the class during initialization. Simplified and removed unused code.
 - 2025-04-23: Added `arm64` Docker support to the Docker images hosted on https://hub.docker.com/repositories/aserbremen. 
 - 2025-01-07: Added ROS2 Jazzy Dockerfiles to this repository and images to the Docker Hub.
 - 2024-12-09: Introduced unique IDs (`boost::uuids::uuid`) for each SLAM instance, which are generated at the start of the SLAM node. Reworked loop closure detection to properly consider candidates when loading and exchanging graphs between SLAM instances.
